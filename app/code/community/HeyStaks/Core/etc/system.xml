@@ -1,0 +1,246 @@
+<config>
+    <tabs>
+        <heystaks translate="label" module="heystaks">
+            <label>HeyStaks</label>
+            <sort_order>199</sort_order>
+        </heystaks>
+    </tabs>
+
+    <sections>
+        <heystaks translate="label" module="heystaks">
+            <label>API</label>
+            <tab>heystaks</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>General</label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active>
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>
+                            <backend_model>heystaks/system_config_active</backend_model>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+
+                        <test>
+                            <label>Test Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </test>
+
+                        <endpoint>
+                            <label>Endpoint</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_class>validate-url</frontend_class>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </endpoint>
+
+                        <oauth_endpoint>
+                            <label>OAuth Endpoint</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_class>validate-url</frontend_class>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </oauth_endpoint>
+
+                        <can_send_feedback>
+                            <label>Can Send Feedback?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Only enable this once the catalogue is fully indexed by HeyStaks</comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </can_send_feedback>
+
+                        <use_js>
+                            <label>Use Javascript API</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Only necessary when using an external cache such as Varnish</comment>
+                            <depends>
+                                <active>1</active>
+                                <can_send_feedback>1</can_send_feedback>
+                            </depends>
+                        </use_js>
+
+                        <use_autocomplete>
+                            <label>Use Custom Autocomplete</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </use_autocomplete>
+
+                        <use_redirects>
+                            <label>Use Magento Redirects and Synonyms</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </use_redirects>
+
+                        <log>
+                            <label>Enable Logging</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>requests and responses will be logged to
+                                {magento_root}/var/log/heystaks.log</comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </log>
+
+                        <result_set_size>
+                            <label>Result Set Size</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_class>validate-number validate-digits</frontend_class>
+                            <comment>The number of results to retrieve from HeyStaks</comment>
+                            <depends>
+                                <active>1</active>
+                            </depends>
+                        </result_set_size>
+                    </fields>
+                </general>
+                <authentication>
+                    <label>Authentication</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <application_id translate="label">
+                            <label>Application ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </application_id>
+
+                        <application_secret translate="label">
+                            <label>Application Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </application_secret>
+
+                        <admin_username translate="label">
+                            <label>Admin Username</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </admin_username>
+
+                        <admin_userpassword translate="label">
+                            <label>Adim User Password</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </admin_userpassword>
+                    </fields>
+                </authentication>
+
+                <frontend>
+                    <label>Frontend Options</label>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <include_out_of_stock translate="label comment">
+                            <label>Include 'Out of Stock' Products?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </include_out_of_stock>
+
+                        <show_sku translate="label comment">
+                            <label>Show SKU in autocomplete?</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </show_sku>
+
+                        <or_message>
+                            <label>Message to Customer when 'OR' matching used</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </or_message>
+                    </fields>
+                </frontend>
+            </groups>
+        </heystaks>
+    </sections>
+</config>

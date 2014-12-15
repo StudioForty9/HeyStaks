@@ -1,0 +1,48 @@
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="heystaks/general/use_js">
+                <type>js</type>
+                <name>heystaks/heystaks.js</name>
+            </action>
+
+            <action method="addItem" ifconfig="heystaks/general/use_autocomplete">
+                <type>js</type>
+                <name>heystaks/autocomplete.js</name>
+            </action>
+
+            <action method="addItem" ifconfig="heystaks/general/use_autocomplete">
+                <type>skin_css</type>
+                <name>css/heystaks/autocomplete.css</name>
+            </action>
+        </reference>
+
+        <reference name="top.search">
+            <action method="setTemplate" ifconfig="heystaks/general/test">
+                <template>heystaks/test-search-form.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="before_body_end">
+            <block type="core/template" name="heystaks.user.id" template="heystaks/user-id.phtml"/>
+            <block type="heystaks/spans" name="heystaks.spans" template="heystaks/before-body-end.phtml"/>
+
+            <block type="core/text" name="heystaks.analytics.js">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<script type="text/javascript" src="https://cdn.heystaks.com/js/hssa.js"></script>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>
+    </default>
+
+    <catalogsearch_result_index>
+        <reference name="head">
+            <action method="addItem">
+                <type>js</type>
+                <name>heystaks/search.js</name>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+</layout>

@@ -1,0 +1,33 @@
+{
+    "description": "HeyStaks Search module",
+    "extra": {
+        "map": [
+            [
+                "app/etc/modules/HeyStaks_Core.xml",
+                "app/etc/modules/HeyStaks_Core.xml"
+            ],
+            [
+                "app/code/community/HeyStaks/",
+                "app/code/community/HeyStaks/"
+            ],
+            [
+                "app/design/frontend/base/default/layout/heystaks.xml",
+                "app/design/frontend/base/default/layout/heystaks.xml"
+            ],
+            [
+                "app/design/frontend/base/default/template/heystaks",
+                "app/design/frontend/base/default/template/heystaks"
+            ],
+            [
+                "js/heystaks/",
+                "js/heystaks/"
+            ]
+        ]
+    },
+    "name": "heystaks/core",
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "type": "magento-module",
+    "version": "dev-master"
+}

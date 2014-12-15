@@ -1,0 +1,23 @@
+<?php /* @var $this HeyStaks_Core_Block_CatalogSearch_Autocomplete */ ?>
+ <ul>
+     <li style="display:none"></li>
+     <?php foreach ($this->getSuggestData() as $index => $item): ?>
+        <li title="<?php echo $item['title']; ?>" url="<?php echo $item['url']; ?>">
+            <div class="col2-set">
+                <div class="col-1">
+                    <img src="<?php echo $item['image']; ?>" alt="<?php echo $item['title']; ?>" />
+                </div>
+
+                <div class="col-2">
+                    <h5><?php echo $item['title']; ?></h5>
+                    <?php if($this->showSku()): ?>
+                        <p><?php echo $item['sku']; ?></p>
+                    <?php endif; ?>
+                    <p><?php echo Mage::helper('core')->currency($item['price']); ?></p>
+                </div>
+            </div>
+
+            <p><?php echo $item['description']; ?></p>
+        </li>
+    <?php endforeach; ?>
+</ul>

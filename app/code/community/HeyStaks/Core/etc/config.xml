@@ -1,0 +1,284 @@
+<config>
+    <modules>
+        <HeyStaks_Core>
+            <version>0.1.2</version>
+        </HeyStaks_Core>
+    </modules>
+
+    <global>
+        <blocks>
+            <heystaks>
+                <class>HeyStaks_Core_Block</class>
+            </heystaks>
+
+            <catalogsearch>
+                <rewrite>
+                    <autocomplete>HeyStaks_Core_Block_CatalogSearch_Autocomplete</autocomplete>
+                </rewrite>
+            </catalogsearch>
+        </blocks>
+
+        <helpers>
+            <heystaks>
+                <class>HeyStaks_Core_Helper</class>
+            </heystaks>
+        </helpers>
+
+        <models>
+            <heystaks>
+                <class>HeyStaks_Core_Model</class>
+                <resourceModel>heystaks_resource</resourceModel>
+            </heystaks>
+
+            <heystaks_resource>
+                <class>HeyStaks_Core_Model_Resource</class>
+                <entities>
+                    <user>
+                        <table>heystaks_user</table>
+                    </user>
+                </entities>
+            </heystaks_resource>
+
+            <catalogsearch>
+                <rewrite>
+                    <query>HeyStaks_Core_Model_CatalogSearch_Query</query>
+                    <indexer_fulltext>HeyStaks_Core_Model_CatalogSearch_Indexer</indexer_fulltext>
+                    <layer>HeyStaks_Core_Model_CatalogSearch_Layer</layer>
+                </rewrite>
+            </catalogsearch>
+        </models>
+
+        <resources>
+            <heystaks_setup>
+                <setup>
+                    <module>HeyStaks_Core</module>
+                </setup>
+            </heystaks_setup>
+        </resources>
+
+        <events>
+            <catalogsearch_query_save_after>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>catalogsearchQuerySaveAfter</method>
+                    </heystaks>
+                </observers>
+            </catalogsearch_query_save_after>
+
+            <cms_page_save_after>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>cmsPageSaveAfter</method>
+                    </heystaks>
+                </observers>
+            </cms_page_save_after>
+
+            <catalog_category_save_after>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>catalogCategorySaveAfter</method>
+                    </heystaks>
+                </observers>
+            </catalog_category_save_after>
+
+            <catalog_entity_attribute_save_before>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>catalogEntityAttributeSaveBefore</method>
+                    </heystaks>
+                </observers>
+            </catalog_entity_attribute_save_before>
+
+            <catalog_product_delete_commit_after>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>catalogProductDeleteCommitAfter</method>
+                    </heystaks>
+                </observers>
+            </catalog_product_delete_commit_after>
+        </events>
+    </global>
+
+    <frontend>
+        <routers>
+            <heystaks>
+                <use>standard</use>
+                <args>
+                    <module>HeyStaks_Core</module>
+                    <frontName>heystaks</frontName>
+                </args>
+            </heystaks>
+
+            <catalogsearch>
+                <args>
+                    <modules>
+                        <heystaks before="Mage_CatalogSearch">HeyStaks_Core</heystaks>
+                    </modules>
+                </args>
+            </catalogsearch>
+        </routers>
+
+        <layout>
+            <updates>
+                <heystaks>
+                    <file>heystaks.xml</file>
+                </heystaks>
+            </updates>
+        </layout>
+
+        <events>
+            <customer_session_init>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>customerSessionInit</method>
+                    </heystaks>
+                </observers>
+            </customer_session_init>
+
+            <controller_action_postdispatch_catalog_product_view>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>controllerActionPostdispatchCatalogProductView</method>
+                    </heystaks>
+                </observers>
+            </controller_action_postdispatch_catalog_product_view>
+
+            <customer_register_success>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>updateCustomer</method>
+                    </heystaks>
+                </observers>
+            </customer_register_success>
+
+            <customer_login>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>updateCustomer</method>
+                    </heystaks>
+                </observers>
+            </customer_login>
+
+            <customer_logout>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>customerLogout</method>
+                    </heystaks>
+                </observers>
+            </customer_logout>
+
+            <checkout_cart_add_product_complete>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>checkoutCartAddProductComplete</method>
+                    </heystaks>
+                </observers>
+            </checkout_cart_add_product_complete>
+
+            <controller_action_postdispatch_checkout_onepage_success>
+                <observers>
+                    <heystaks>
+                        <type>model</type>
+                        <class>heystaks/observer</class>
+                        <method>controllerActionPostdispatchCheckoutOnepageSuccess</method>
+                    </heystaks>
+                </observers>
+            </controller_action_postdispatch_checkout_onepage_success>
+        </events>
+    </frontend>
+
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <heystaks>
+                                            <title>HeyStaks Configuration</title>
+                                        </heystaks>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+        <events>
+            <controller_action_predispatch_adminhtml_system_config_edit>
+                <observers>
+                    <heystaks_core>
+                        <type>model</type>
+                        <class>HeyStaks_Core_Model_Observer</class>
+                        <method>controllerActionPredipsatchAdminhtmlSystemConfigEdit</method>
+                    </heystaks_core>
+                </observers>
+            </controller_action_predispatch_adminhtml_system_config_edit>
+        </events>
+    </adminhtml>
+
+    <crontab>
+        <jobs>
+            <heystaks_refresh_token>
+                <schedule>
+                    <cron_expr>0 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>
+                        heystaks_core/observer::heystaks_refresh_token
+                    </model>
+                </run>
+            </heystaks_refresh_token>
+        </jobs>
+    </crontab>
+
+    <default>
+        <heystaks>
+            <general>
+                <can_send_feedback>0</can_send_feedback>
+                <result_set_size>1000</result_set_size>
+            </general>
+            <page_types>
+                <product>1</product>
+                <category>0</category>
+                <page>0</page>
+            </page_types>
+            <frontend>
+                <include_out_of_stock>0</include_out_of_stock>
+            </frontend>
+
+            <cookie>
+                <ttl>31536000</ttl>
+            </cookie>
+        </heystaks>
+    </default>
+</config>
