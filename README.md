@@ -9,7 +9,7 @@ Installation
 ### Magento Connect
 The HeyStaks module is currently in the process of being listed on Magento Connect.
 
-In the meantime you can download the package [here](http://www.studioforty9.com/heystaks/)
+In the meantime you can download the package [here](http://heystaks.studioforty9.com/HeyStaks_Core-0.1.2.tgz)
 
 To install the module via Magento Connect, carry out the following steps:
 
@@ -32,7 +32,7 @@ Once, you are comfortable with this process all you need to do is:
 
    `{
 		   	"type": "git",
-   			"url": "https://github.com/StudioForty9/HeyStaks/HeyStaks.git"
+   			"url": "https://github.com/StudioForty9/HeyStaks.git"
     }`
 
 2. Add the following under the "required" attribute in your composer.json:
