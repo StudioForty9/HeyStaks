@@ -9,7 +9,7 @@ Installation
 ### Magento Connect
 The HeyStaks module is currently in the process of being listed on Magento Connect.
 
-In the meantime you can download the package [here](http://heystaks.studioforty9.com/HeyStaks_Core-0.1.2.tgz)
+In the meantime you can download the package [here](http://heystaks.studioforty9.com/HeyStaks_Core-0.1.3.tgz)
 
 To install the module via Magento Connect, carry out the following steps:
 
@@ -119,7 +119,7 @@ Demo Site
 
 A Demonstration Installation of the current version of Magento Community Edition using the Sample Data provided by Magento is available at the following URL:
 
-[http://www.testgento.com/](http://www.testgento.com)
+[http://heystaks.studioforty9.com/](http://heystaks.studioforty9.com/)
 
 You can also login to the Magento Admin to view the configuration settings.
 
@@ -139,7 +139,6 @@ Limitations
 ------------
 The module is currently limited in the following ways:
 
-* It does not support multiple websites / stores. This is due to the fact that only the default store is sent across to HeyStaks during Indexing. This will be resolved in future versions.
 * The number of results available for each filter in the Layered Navigation is not correct.
 
 

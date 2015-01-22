@@ -52,22 +52,20 @@ class HeyStaks_Core_Model_CatalogSearch_Indexer extends Mage_CatalogSearch_Model
                 default:
                     $storeId = $config->getScopeId();
             }
+
+            $initialEnvironmentInfo = $appEmulation->startEnvironmentEmulation($storeId);
+
+            $this->_heystaks->fetchToken();
+            $this->_reindexProducts($storeId);
+
+            $appEmulation->stopEnvironmentEmulation($initialEnvironmentInfo);
         }
-
-        $initialEnvironmentInfo = $appEmulation->startEnvironmentEmulation($storeId);
-
-        $this->_heystaks->fetchToken();
-        $this->_reindexProducts();
-        //$this->_reindexCategories();
-        //$this->_reindexPages();
-
-        $appEmulation->stopEnvironmentEmulation($initialEnvironmentInfo);
     }
 
     /**
      *
      */
-    protected function _reindexProducts()
+    protected function _reindexProducts($storeId)
     {
         if (Mage::helper('heystaks')->canIncludeInSearch('product')) {
             $collection = Mage::getModel('catalog/product')->getCollection()
@@ -77,7 +75,7 @@ class HeyStaks_Core_Model_CatalogSearch_Indexer extends Mage_CatalogSearch_Model
                         'image', 'price', 'manufacturer', 'color'
                     )
                 )
-                ->addStoreFilter(1)
+                ->addStoreFilter($storeId)
                 ->addUrlRewrite()
                 ->setPageSize(100)
                 ->setCurPage(1);
@@ -93,10 +91,11 @@ class HeyStaks_Core_Model_CatalogSearch_Indexer extends Mage_CatalogSearch_Model
 
             $i = 1;
             while ($i <= $collection->getLastPageNumber()) {
-                $this->_heystaks->indexProducts($collection);
+                Mage::getModel('heystaks/heystaks')->indexProducts($collection);
                 $i++;
                 $collection->clear();
                 $collection->setCurPage($i)->load();
+                break;
             }
         }
     }

@@ -52,8 +52,6 @@ class HeyStaks_Core_Model_Heystaks extends Mage_Core_Model_Abstract
             }
         }
 
-        //die(var_dump($this->_token));
-
         return $this->_token;
     }
 
@@ -64,14 +62,17 @@ class HeyStaks_Core_Model_Heystaks extends Mage_Core_Model_Abstract
     {
         $url = Mage::getStoreConfig('heystaks/general/oauth_endpoint');
         $client = $this->_getClient($url);
-        $client->setAuth($this->_config['applicationId']);
+        $client->setAuth(Mage::getStoreConfig('heystaks/authentication/application_id'));
         $client->setEncType('application/x-www-form-urlencoded');
         $client->setParameterPost('grant_type', 'password');
-        $client->setParameterPost('username', $this->_config['username']);
-        $client->setParameterPost('password', $this->_config['password']);
+        $client->setParameterPost('username', Mage::getStoreConfig('heystaks/authentication/admin_username'));
+        $client->setParameterPost('password', Mage::getStoreConfig('heystaks/authentication/admin_userpassword'));
 
         try {
-            $response = Mage::helper('core')->jsonDecode($client->request()->getBody());
+            Mage::helper('heystaks')->log($client, 'request');
+            $response = $client->request();
+            Mage::helper('heystaks')->log($response, 'response');
+            $response = Mage::helper('core')->jsonDecode($response->getBody());
         } catch (Exception $e) {
             Mage::logException($e);
             Mage::helper('heystaks')->log($e->getMessage(), 'error');
@@ -81,7 +82,7 @@ class HeyStaks_Core_Model_Heystaks extends Mage_Core_Model_Abstract
         $this->_token = $response['access_token'];
 
         Mage::app()->getConfig()
-            ->saveConfig('heystaks/authentication/token', $this->_token)
+            ->saveConfig('heystaks/authentication/token', $this->_token, 'stores', Mage::app()->getStore()->getId())
             ->reinit();
 
         return $this;
@@ -95,7 +96,6 @@ class HeyStaks_Core_Model_Heystaks extends Mage_Core_Model_Abstract
         $cookies = Mage::getSingleton('core/cookie')->get();
         if (!empty($cookies)) {
             if (!$this->_getCookie('heystaks_user_id')) {
-                Mage::helper('heystaks')->log('User not in session', 'user');
                 $sessionId = $this->_session->getSessionId();
                 $path = '/users/';
                 $client = $this->_getClient($this->_config['endpoint'] . $path);
@@ -440,7 +440,7 @@ class HeyStaks_Core_Model_Heystaks extends Mage_Core_Model_Abstract
     {
         $auth = array(
             'application_id' => $this->_config['applicationId'],
-            'user_id' => $this->_config['username']
+            'user_id' => $this->_config['username'] . '_' . $this->_config['applicationId']
         );
 
         $communities = '~NONE';
@@ -527,6 +527,7 @@ class HeyStaks_Core_Model_Heystaks extends Mage_Core_Model_Abstract
             return $helper->jsonDecode($response->getBody());
         } catch (Exception $e) {
             Mage::logException($e);
+            Mage::helper('heystaks')->log($client, 'error');
             Mage::helper('heystaks')->log($response, 'error');
         }
     }
