@@ -37,9 +37,9 @@ class HeyStaks_Core_Model_Observer extends Varien_Event_Observer
                 $request = $observer->getControllerAction()->getRequest();
                 if (strpos(Mage::helper('core/url')->getCurrentUrl(), 'catalogsearch/result') == false) {
                     $heystaks = Mage::getModel('heystaks/heystaks');
-//                    if (strpos(Mage::helper('core/http')->getHttpReferer(), 'catalogsearch/result') !== false) {
                     if ($request->getParam('referer') == 'heystaks_search_results'){
-                        $heystaks->selectSearchResult();
+                        $position = $request->getParam('position');
+                        $heystaks->selectSearchResult($position);
                     } else {
                         $heystaks->sendFeedback(HeyStaks_Core_Model_Heystaks::ACTION_BROWSE);
                     }

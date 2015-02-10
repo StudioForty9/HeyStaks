@@ -285,10 +285,11 @@ class HeyStaks_Core_Model_Heystaks extends Mage_Core_Model_Abstract
     /**
      *
      */
-    public function selectSearchResult()
+    public function selectSearchResult($position = 1)
     {
         $params['query'] = $this->_getCookie('heystaks_query');
         $params['query_id'] = $this->_getCookie('heystaks_query_id');
+        $params['select_position'] = $position;
         $this->sendFeedback(self::ACTION_SELECT, $params);
     }
 
