@@ -4,7 +4,7 @@ document.observe("dom:loaded", function() {
             e.stop();
             var resultsPerPage = $$('.item').length;
             var page = parseInt(document.URL.toQueryParams().p);
-            var position = (element.up('li').previousSiblings().size() + 1) + (page * resultsPerPage);
+            var position = (element.up('li').previousSiblings().size() + 1) + ((page - 1) * resultsPerPage);
             window.location = element.href + '?referer=heystaks_search_results&position=' + position;
         });
     });
