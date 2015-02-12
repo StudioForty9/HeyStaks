@@ -266,6 +266,8 @@
             <general>
                 <can_send_feedback>0</can_send_feedback>
                 <result_set_size>1000</result_set_size>
+				<oauth_endpoint>http://heystaksserver1.ucd.ie:8091/oauth2/token</oauth_endpoint>
+				<endpoint>http://heystaksserver1.ucd.ie:8880</endpoint>
             </general>
             <page_types>
                 <product>1</product>
