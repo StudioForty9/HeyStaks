@@ -615,12 +615,12 @@ class HeyStaks_Core_Model_Heystaks extends Mage_Core_Model_Abstract
         }
 
         //Remove invisible products
-        $products->addAttributeToFilter('visibility', array('nin' => Mage::getModel('catalog/product_visibility')->getVisibleInSearchIds()));
+        $products->addAttributeToFilter('visibility', array('in' => Mage::getModel('catalog/product_visibility')->getVisibleInSearchIds()));
 
         //Filter by Layered Navigation
         $request = Mage::app()->getRequest();
         $params = $request->getParams();
-        $ignore = array('q', 'dir', 'order', 'mode', 'p', 'filter', 'limit', 'cat', 'search_type');
+        $ignore = array('q', 'dir', 'order', 'mode', 'p', 'filter', 'limit', 'cat', 'search_type', 'position');
         foreach ($params as $key => $value) {
             if ($key == 'cat') {
                 $products->addCategoryFilter(

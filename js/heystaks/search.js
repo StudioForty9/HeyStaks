@@ -1,5 +1,5 @@
 document.observe("dom:loaded", function() {
-    $$('.category-products ol a:not(".link-wishlist, .link-compare")').each(function (element) {
+    $$('.category-products ol.products-list a:not(".link-wishlist, .link-compare")').each(function (element) {
         element.observe('click', function (e) {
             e.stop();
             var position = element.up('li').previousSiblings().size() + 1;
