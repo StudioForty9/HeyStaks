@@ -95,7 +95,6 @@ class HeyStaks_Core_Model_CatalogSearch_Indexer extends Mage_CatalogSearch_Model
                 $i++;
                 $collection->clear();
                 $collection->setCurPage($i)->load();
-                break;
             }
         }
     }
